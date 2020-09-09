@@ -12,7 +12,13 @@ public class Ball : MonoBehaviour
     {
         Debug.Log("Start called in Ball");
         rb = GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
+        int direct = Random.Range(0, 1);
+        if(direct == 0){
+            rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
+        }
+        else{
+            rb.velocity = new Vector3(-5, 0, Random.Range(-7.5f, 7.5f));
+        }
     }
 
     // Update is called once per frame
@@ -31,7 +37,12 @@ public class Ball : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
+       if(other.gameObject.name == "RightGoal"){
+           rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
+        }
+        if(other.gameObject.name == "LeftGoal"){
+            rb.velocity = new Vector3(-5, 0, Random.Range(-7.5f, 0f));
+        }
         transform.position = new Vector3(0, 0.5f, 0);
         counter = 0;
     }
