@@ -41,7 +41,7 @@ public class Ball : MonoBehaviour
            rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
         }
         if(other.gameObject.name == "LeftGoal"){
-            rb.velocity = new Vector3(-5, 0, Random.Range(-7.5f, 0f));
+            rb.velocity = new Vector3(-5, 0, Random.Range(-7.5f, 7.5f));
         }
         transform.position = new Vector3(0, 0.5f, 0);
         counter = 0;
