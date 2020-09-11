@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public int left_score = 0, right_score = 0;
     GameObject lGoal, rGoal;
+    public TextMeshProUGUI score;
 
     // Start is called before the first frame update
     void Start()
     {
         lGoal = GameObject.Find("LeftGoal");
         rGoal = GameObject.Find("RightGoal");
+        score.text = left_score + " : " + right_score;
     }
 
     // Update is called once per frame
