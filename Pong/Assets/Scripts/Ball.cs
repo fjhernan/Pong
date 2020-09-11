@@ -4,47 +4,45 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    Rigidbody rb;
-    public int counter = 0;
 
+    [SerializeField] private float amplitude;
+    [SerializeField] private float step;
+    private float startAmplitude;
+
+    private Rigidbody rb;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Debug.Log("Start called in Ball");
-        rb = GetComponent<Rigidbody>();
-        int direct = Random.Range(0, 1);
-        if(direct == 0){
-            rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
-        }
-        else{
-            rb.velocity = new Vector3(-5, 0, Random.Range(-7.5f, 7.5f));
-        }
+        rb = gameObject.GetComponent<Rigidbody>();
+        startAmplitude = amplitude;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Restart()
     {
-        
-    }
-    void OnCollisionEnter(Collision collision)
-    {
-        counter++;
-        if (counter % 5 == 0)
-        {
-            rb.velocity = new Vector3(rb.velocity.x * 1.3f, 0, rb.velocity.z * 1.3f);
-        }
+        amplitude = startAmplitude;
+        rb.MovePosition(Vector3.zero);
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.right * amplitude; // change to send to losing side
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-       if(other.gameObject.name == "RightGoal"){
-           rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
+
+        if (collision.gameObject.name == "PaddleLeft" || collision.gameObject.name == "PaddleRight")
+        {
+            //play sound
+
+            amplitude += step;
+            float offset = Mathf.Pow((transform.position.z - collision.transform.position.z), 2);
+            offset = (transform.position.z - collision.transform.position.z < 0) ? offset * -1 : offset;
+
+            rb.velocity = (collision.gameObject.name == "PaddleLeft")
+                ? new Vector3(amplitude, 0, offset)
+                : new Vector3(-amplitude, 0, offset);
         }
-        if(other.gameObject.name == "LeftGoal"){
-            rb.velocity = new Vector3(-5, 0, Random.Range(-7.5f, 7.5f));
-        }
-        transform.position = new Vector3(0, 0.5f, 0);
-        counter = 0;
+        
+
     }
+
 
 }
