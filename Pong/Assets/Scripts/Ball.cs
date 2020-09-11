@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
     {
         Debug.Log("Start called in Ball");
         rb = GetComponent<Rigidbody>();
-        int direct = Random.Range(0, 1);
+        int direct = Random.Range(0, 2);
         if(direct == 0){
             rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
         }
