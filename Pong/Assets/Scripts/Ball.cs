@@ -6,12 +6,14 @@ public class Ball : MonoBehaviour
 {
     Rigidbody rb;
     public int counter = 0;
-
+    private AudioSource aSource;
+    public AudioClip clip1, clip2, clip3;
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Start called in Ball");
         rb = GetComponent<Rigidbody>();
+        aSource = GetComponent<AudioSource>();
         int direct = Random.Range(0, 2);
         if(direct == 0){
             rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
@@ -32,6 +34,14 @@ public class Ball : MonoBehaviour
         if (counter % 5 == 0)
         {
             rb.velocity = new Vector3(rb.velocity.x * 1.3f, 0, rb.velocity.z * 1.3f);
+            aSource.PlayOneShot(clip1);
+        }
+        if(collision.gameObject.name == "PaddleLeft" || collision.gameObject.name == "PaddleRight"){
+            aSource.PlayOneShot(clip2);    
+        }
+        if(collision.gameObject.name == "UpperWall" || collision.gameObject.name == "LowerWall")
+        {
+            aSource.PlayOneShot(clip3);
         }
     }
 
