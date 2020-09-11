@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public int debugChecker = 0;
     GameObject leftPaddle, rightPaddle;
 
     // Start is called before the first frame update
@@ -11,6 +12,7 @@ public class InputManager : MonoBehaviour
     {
         leftPaddle = GameObject.Find("PaddleLeft");
         rightPaddle = GameObject.Find("PaddleRight");
+
     }
 
     // Update is called once per frame

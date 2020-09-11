@@ -32,6 +32,7 @@ public class Ball : MonoBehaviour
         {
             //play sound
 
+<<<<<<< HEAD
             amplitude += step;
             float offset = Mathf.Pow((transform.position.z - collision.transform.position.z), 2);
             offset = (transform.position.z - collision.transform.position.z < 0) ? offset * -1 : offset;
@@ -39,6 +40,15 @@ public class Ball : MonoBehaviour
             rb.velocity = (collision.gameObject.name == "PaddleLeft")
                 ? new Vector3(amplitude, 0, offset)
                 : new Vector3(-amplitude, 0, offset);
+=======
+    void OnTriggerEnter(Collider other)
+    {
+       if(other.gameObject.name == "RightGoal"){
+           rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
+        }
+        if(other.gameObject.name == "LeftGoal"){
+            rb.velocity = new Vector3(-5, 0, Random.Range(-7.5f, 0f));
+>>>>>>> parent of 82336f9... Pong Project Part 1A edits
         }
         
 
