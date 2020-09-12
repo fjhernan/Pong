@@ -32,10 +32,11 @@ public class ScoreManager : MonoBehaviour
             Debug.Log("Left Player Scores!\nL: " + right_score + "   R: " + left_score);
         }
 
-        if (lGoal.GetComponent<LeftGoal>().score == 11)
+        if (lGoal.GetComponent<LeftGoal>().score >= 11)
         {
             Debug.Log("Right Player Win!");
             lGoal.GetComponent<LeftGoal>().score = 0;
+            rGoal.GetComponent<RightGoal>().score = 0;
             left_score = 0;
             right_score = 0;
             score.text = "<color=red>Right Player Wins!</color>";
@@ -44,6 +45,7 @@ public class ScoreManager : MonoBehaviour
         if (rGoal.GetComponent<RightGoal>().score >= 11)
         {
             Debug.Log("Left Player Wins!");
+            lGoal.GetComponent<LeftGoal>().score = 0;
             rGoal.GetComponent<RightGoal>().score = 0;
             left_score = 0;
             right_score = 0;

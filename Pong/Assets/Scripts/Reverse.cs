@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
-public class SpeedUp : MonoBehaviour
+public class Reverse : MonoBehaviour
 {
     private float tTrack = 0;
     private bool spawned = false;
@@ -15,7 +14,7 @@ public class SpeedUp : MonoBehaviour
     {
         aSource = GetComponent<AudioSource>();
         ball = GameObject.Find("Ball");
-        transform.position = new Vector3(0, 0, 20.0f);
+        transform.position = new Vector3(0, 0, -20.0f);
     }
 
     // Update is called once per frame
@@ -24,9 +23,9 @@ public class SpeedUp : MonoBehaviour
         if (spawned == false)
         {
             tTrack += Time.deltaTime;
-            if (tTrack > 8.0f)
+            if (tTrack > 16.0f)
             {
-                Debug.Log("Ball has Spawned");
+                Debug.Log("Reverse powerup has Spawned");
                 transform.position = new Vector3(Random.Range(-8.0f, 8.0f), 0f, Random.Range(-7.5f, 7.5f));
                 tTrack = 0;
                 spawned = true;
@@ -36,14 +35,14 @@ public class SpeedUp : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "Ball")
+        if(collision.gameObject.name == "Ball")
         {
-            Debug.Log("Ball has sped up. SpeedUp has Despawned");
+            Debug.Log("Ball moves the other way");
             aSource.PlayOneShot(clip1);
             ball.GetComponent<Ball>().rb.velocity = new Vector3(
-                ball.GetComponent<Ball>().rb.velocity.x * 1.5f, 0f,
-                ball.GetComponent<Ball>().rb.velocity.z * 1.5f);
-            transform.position = new Vector3(0, 0, 20.0f);
+                ball.GetComponent<Ball>().rb.velocity.x * -1.0f, 0f,
+                ball.GetComponent<Ball>().rb.velocity.z);
+            transform.position = new Vector3(0, 0, -20.0f);
             spawned = false;
         }
     }
