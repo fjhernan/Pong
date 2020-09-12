@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    Rigidbody rb;
+    public Rigidbody rb;
     public int counter = 0;
     private AudioSource aSource;
     public AudioClip clip1, clip2, clip3;
@@ -49,12 +49,14 @@ public class Ball : MonoBehaviour
     {
        if(other.gameObject.name == "RightGoal"){
            rb.velocity = new Vector3(5, 0, Random.Range(-7.5f, 7.5f));
+            transform.position = new Vector3(0, 0.5f, 0);
+            counter = 0;
         }
         if(other.gameObject.name == "LeftGoal"){
             rb.velocity = new Vector3(-5, 0, Random.Range(-7.5f, 0f));
+            transform.position = new Vector3(0, 0.5f, 0);
+            counter = 0;
         }
-        transform.position = new Vector3(0, 0.5f, 0);
-        counter = 0;
     }
 
 }
