@@ -38,13 +38,16 @@ public class SpeedUp : MonoBehaviour
     {
         if (collision.gameObject.name == "Ball")
         {
-            Debug.Log("Ball has sped up. SpeedUp has Despawned");
-            aSource.PlayOneShot(clip1);
-            ball.GetComponent<Ball>().rb.velocity = new Vector3(
-                ball.GetComponent<Ball>().rb.velocity.x * 1.5f, 0f,
-                ball.GetComponent<Ball>().rb.velocity.z * 1.5f);
-            transform.position = new Vector3(0, 0, 20.0f);
-            spawned = false;
+            if (ball.GetComponent<Ball>().counter < 40)
+            {
+                Debug.Log("Ball has sped up. SpeedUp has Despawned");
+                aSource.PlayOneShot(clip1);
+                ball.GetComponent<Ball>().rb.velocity = new Vector3(
+                    ball.GetComponent<Ball>().rb.velocity.x * 1.5f, 0f,
+                    ball.GetComponent<Ball>().rb.velocity.z * 1.5f);
+                transform.position = new Vector3(0, 0, 20.0f);
+                spawned = false;
+            }
         }
     }
 }

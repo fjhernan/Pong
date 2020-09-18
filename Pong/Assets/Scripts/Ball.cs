@@ -26,12 +26,13 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+            
     }
+
     void OnCollisionEnter(Collision collision)
     {
         counter++;
-        if (counter % 5 == 0)
+        if (counter % 3 == 0 && counter < 40)
         {
             rb.velocity = new Vector3(rb.velocity.x * 1.3f, 0, rb.velocity.z * 1.3f);
             aSource.PlayOneShot(clip1);
